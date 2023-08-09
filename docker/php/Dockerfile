@@ -31,7 +31,7 @@ ENV TERM=xterm
 
 ENV NVM_DIR="$HOME/.nvm"
 
-WORKDIR /var/www/todo
+WORKDIR /var/www/simple-project
 
 RUN mkdir public
 

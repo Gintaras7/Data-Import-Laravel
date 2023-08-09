@@ -1,6 +1,6 @@
 version: "2"
 services:
-  todo-mysql:
+  mysql:
     container_name: ${CONTAINER_NAME_MYSQL}
     build: ./docker/mysql
     environment:
@@ -15,7 +15,7 @@ services:
       - ${DB_PORT}:3306
     expose:
       - 3306
-  todo-php:
+  php:
     container_name: ${CONTAINER_NAME_PHP}
     build: ./docker/php
     ports:
@@ -26,7 +26,7 @@ services:
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
       - ./vendor:/var/www/simple-project/vendor
     depends_on:
-      - todo-mysql
+      - mysql
     working_dir: ${PROJECT_ROOT_CONTAINER}
     environment:
       - APP_ENV_NAME=${APP_ENV_NAME}
