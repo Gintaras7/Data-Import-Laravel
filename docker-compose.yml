@@ -1,0 +1,35 @@
+version: "2"
+services:
+  todo-mysql:
+    container_name: ${CONTAINER_NAME_MYSQL}
+    build: ./docker/mysql
+    environment:
+      MYSQL_DATABASE: mydatabase1
+      MYSQL_USER: myusername
+      MYSQL_PASSWORD: mypassword
+      MYSQL_ROOT_PASSWORD: mypassword
+    volumes:
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - db:/var/lib/mysql
+    ports:
+      - ${DB_PORT}:3306
+    expose:
+      - 3306
+  todo-php:
+    container_name: ${CONTAINER_NAME_PHP}
+    build: ./docker/php
+    ports:
+      - ${CONTAINER_PORT_PHP}:80
+    volumes:
+      - .:/var/www/simple-project
+      - ./docker/php/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./vendor:/var/www/simple-project/vendor
+    depends_on:
+      - todo-mysql
+    working_dir: ${PROJECT_ROOT_CONTAINER}
+    environment:
+      - APP_ENV_NAME=${APP_ENV_NAME}
+volumes:
+  db:
+  portainer_data:
