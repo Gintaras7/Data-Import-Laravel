@@ -28,13 +28,15 @@ class LocationDto
         return $this->type;
     }
 
-    public function getTimestamp(): \DateTime|string
+    public function getTimestamp(): \DateTime
     {
-        if ($this->timestamp instanceof \DateTime) {
-            return $this->timestamp;
-        }
+        $timestamp = $this->timestamp instanceof \DateTime
+            ? $this->timestamp
+            : (new \DateTime($this->timestamp));
 
-        return $this->timestamp;
+        $formattedDate = $timestamp->format('Y-m-d H:i:s');
+
+        return new \DateTime($formattedDate);
     }
 
     public function getBoxId(): string

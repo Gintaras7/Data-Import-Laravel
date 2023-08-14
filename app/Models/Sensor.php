@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Sensor extends Model
 {
@@ -17,7 +18,7 @@ class Sensor extends Model
         'lastMeasurement'
     ];
 
-    public function box()
+    public function box(): BelongsTo
     {
         return $this->belongsTo(Box::class);
     }

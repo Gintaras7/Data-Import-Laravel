@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Box extends Model
 {
@@ -10,18 +12,25 @@ class Box extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'id', 'name', 'model', 'exposure', 'description', 'createdAt', 'updatedAt', 'lastMeasurementAt'
+        'id',
+        'name',
+        'model',
+        'exposure',
+        'description',
+        'createdAt',
+        'updatedAt',
+        'lastMeasurementAt'
     ];
 
     protected $dates = ['createdAt', 'updatedAt', 'lastMeasurementAt'];
 
     // Relationships
-    public function sensors()
+    public function sensors(): HasMany
     {
         return $this->hasMany(Sensor::class);
     }
 
-    public function location()
+    public function location(): HasOne
     {
         return $this->hasOne(Location::class);
     }
