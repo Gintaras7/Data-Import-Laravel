@@ -22,9 +22,12 @@ class Box extends Model
         'lastMeasurementAt'
     ];
 
-    protected $dates = ['createdAt', 'updatedAt', 'lastMeasurementAt'];
+    protected $dates = [
+        'createdAt',
+        'updatedAt',
+        'lastMeasurementAt'
+    ];
 
-    // Relationships
     public function sensors(): HasMany
     {
         return $this->hasMany(Sensor::class);
