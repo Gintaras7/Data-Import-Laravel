@@ -28,7 +28,7 @@ class LocationDto
         return $this->type;
     }
 
-    public function getTimestamp(): \DateTime
+    public function getTimestamp(): \DateTime|string
     {
         if ($this->timestamp instanceof \DateTime) {
             return $this->timestamp;
